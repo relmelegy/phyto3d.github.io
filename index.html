@@ -266,7 +266,7 @@
 ══════════════════════════════════════════════════════════════ -->
 <header>
   <div class="container">
-    <p class="venue">Ongoing Research &nbsp;·&nbsp; Plant Morphometrics &amp; Computer Vision</p>
+    <p class="venue">Ongoing Research &nbsp;·&nbsp; Biodiversity Informatics &amp; Herbarium Digitization</p>
 
     <h1>From Photos to Phenotypes: Machine Learning for Floral 3D Reconstruction and Shape Evolution</h1>
 
@@ -328,28 +328,28 @@
   <section id="pipeline">
     <h2>Pipeline Overview</h2>
     <p>
-      The pipeline explores machine learning approaches for reconstructing flowers from images and extracting biologically meaningful representations for comparative and evolutionary analysis.
+      This project explores image-based 3D reconstruction workflows for flowers and related questions in floral morphology. The current site highlights reconstruction results obtained so far, while methods for downstream comparative and evolutionary analysis remain under development.
     </p>
     <div class="pipeline-steps">
       <div class="step-card">
         <div class="icon">&#128247;</div>
         <h3>Image Collection</h3>
-        <p>Multi-view or single-view photographs of flowers sourced from herbarium scans and field photography.</p>
+        <p>Photographs of flowers are collected from multiple viewpoints to support image-based reconstruction.</p>
+      </div>
+      <div class="step-card">
+        <div class="icon">&#128295;</div>
+        <h3>Preprocessing</h3>
+        <p>Images are organized and prepared for reconstruction, including calibration and pose estimation workflows where applicable.</p>
       </div>
       <div class="step-card">
         <div class="icon">&#129302;</div>
         <h3>3D Reconstruction</h3>
-        <p>Neural radiance fields and implicit-surface networks reconstruct dense, watertight meshes per specimen.</p>
+        <p>We test neural rendering and Gaussian splatting approaches to generate 3D representations of floral structures from photographs.</p>
       </div>
       <div class="step-card">
-        <div class="icon">&#128200;</div>
-        <h3>Shape Encoding</h3>
-        <p>Geometric deep learning extracts rotation-invariant descriptors that capture petal curvature, symmetry, and spatial arrangement.</p>
-      </div>
-      <div class="step-card">
-        <div class="icon">&#127807;</div>
-        <h3>Evolutionary Analysis</h3>
-        <p>Descriptors are projected onto a phylogenetic tree to quantify convergence, divergence, and rates of shape change.</p>
+        <div class="icon">&#128065;</div>
+        <h3>Qualitative Assessment</h3>
+        <p>Current evaluation focuses on visual inspection of reconstruction quality, structural completeness, and preservation of visible floral features.</p>
       </div>
     </div>
   </section>
@@ -396,40 +396,13 @@
       </div>
     </div>
 
-    <!-- Quantitative -->
-    <h3 style="margin-top:2rem;">Quantitative Evaluation</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Method</th>
-          <th>Chamfer ↓ (mm)</th>
-          <th>F-Score@1mm ↑</th>
-          <th>Normal Consistency ↑</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>SfM + Poisson</td>
-          <td>2.81</td>
-          <td>0.61</td>
-          <td>0.74</td>
-        </tr>
-        <tr>
-          <td>NeRF (vanilla)</td>
-          <td>1.94</td>
-          <td>0.73</td>
-          <td>0.81</td>
-        </tr>
-        <tr>
-          <td><strong>Ours (NeuS + prior)</strong></td>
-          <td><strong>1.22</strong></td>
-          <td><strong>0.88</strong></td>
-          <td><strong>0.91</strong></td>
-        </tr>
-      </tbody>
-    </table>
-    <p style="font-size:0.82rem; color:#666; margin-top:0.6rem;">
-      Preliminary numbers on 40 specimens; full benchmark in preparation.
+    <!-- Evaluation -->
+    <h3 style="margin-top:2rem;">Evaluation</h3>
+    <p>
+      Evaluation of reconstruction quality is ongoing. At this stage, we focus on qualitative assessment of 3D reconstructions across different plant specimens, including visual fidelity, structural completeness, and the ability to capture fine morphological features.
+    </p>
+    <p>
+      Future work will include systematic quantitative evaluation using geometric metrics and comparisons across reconstruction methods.
     </p>
 
     <!-- Video -->
@@ -444,13 +417,12 @@
   <section id="bibtex">
     <h2>Citation</h2>
     <p>If you find this work useful, please cite:</p>
-    <pre>@article{elmelegy2026phyto3d,
-  title   = {From Photos to Phenotypes: Machine Learning for
-             Floral {3D} Reconstruction and Shape Evolution},
-  author  = {El Melegy, Randa},
-  journal = {(under review)},
-  year    = {2026},
-  url     = {https://phyto3d.github.io}
+    <pre>@misc{jin2026phyto3d,
+  title  = {From Photos to Phenotypes: Machine Learning for Floral {3D} Reconstruction and Shape Evolution},
+  author = {Jin, JianJun and Eaton, Deren A. R. and Yang, Yue and Elmelegy, Raaid},
+  year   = {2026},
+  note   = {Project page},
+  url    = {https://relmelegy.github.io/phyto3d.github.io/}
 }</pre>
   </section>
 
@@ -461,7 +433,7 @@
 ══════════════════════════════════════════════════════════════ -->
 <footer>
   <p>
-    &copy; 2026 Phyto3D Lab &nbsp;&middot;&nbsp;
+    &copy; 2026 Phyto3D &nbsp;&middot;&nbsp;
     <a href="https://github.com/relmelegy/phyto3d.github.io" target="_blank" rel="noopener">GitHub</a>
   </p>
 </footer>
