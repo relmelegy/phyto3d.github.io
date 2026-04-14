@@ -271,10 +271,10 @@
     <h1>From Photos to Phenotypes: Machine Learning for Floral 3D Reconstruction and Shape Evolution</h1>
 
     <p class="authors">
-      Randa El Melegy
+      JianJun Jin, Deren A. R. Eaton, Yue Yang, Raaid Elmelegy
     </p>
     <p class="affiliation">
-      Phyto3D Lab
+      New York Botanical Garden · Columbia University
     </p>
 
     <div class="btn-row">
@@ -313,21 +313,13 @@
     <h2>Abstract</h2>
     <div class="abstract-box">
       <p>
-        Understanding floral morphology is central to plant evolutionary biology, yet capturing the full
-        three-dimensional geometry of flowers at scale remains a long-standing challenge. Traditional
-        morphometric approaches rely on manually collected landmarks or two-dimensional measurements that
-        inevitably discard depth information and are labour-intensive to obtain.
+        Flowers are fundamentally three-dimensional structures, yet much of plant comparative work still relies on flattened specimens, limited views, or simplified descriptors. Richer 3D data could open new possibilities for studying floral form, function, and evolution, but collecting such data at scale remains difficult. Living flowers are often small, delicate, reflective, hairy, curved, or partly translucent, and even when a 3D model can be generated, turning it into biologically useful comparative data is another challenge.
       </p>
       <p>
-        This project develops an end-to-end machine-learning pipeline that reconstructs dense 3D flower
-        models from ordinary photographs and automatically extracts biologically meaningful shape
-        descriptors. The reconstructed shapes are then embedded in a phylogenetically informed latent
-        space to study how floral form has diversified across flowering-plant lineages.
+        We are exploring machine learning in this broader context of floral 3D phenomics. On one side, newer approaches such as neural rendering and related methods may help extend what kinds of flowers can be reconstructed from image-based datasets. On the other hand, machine-learning-based shape representations may help preserve biologically meaningful geometry for comparative and evolutionary analyses.
       </p>
       <p>
-        Our approach combines neural implicit surfaces, differentiable rendering, and geometric deep
-        learning to make large-scale 3D phenotyping feasible from image collections that already exist in
-        herbarium and biodiversity databases.
+        Together, these directions point toward a larger goal: making 3D flowers not just visually impressive, but comparable, reusable, and evolution-ready.
       </p>
     </div>
   </section>
@@ -336,8 +328,7 @@
   <section id="pipeline">
     <h2>Pipeline Overview</h2>
     <p>
-      The pipeline consists of four tightly integrated stages, from raw image input to downstream
-      evolutionary analysis.
+      The pipeline explores machine learning approaches for reconstructing flowers from images and extracting biologically meaningful representations for comparative and evolutionary analysis.
     </p>
     <div class="pipeline-steps">
       <div class="step-card">
@@ -367,7 +358,7 @@
   <section id="results">
     <h2>Results</h2>
     <p>
-      Work is ongoing. Preliminary results on a pilot dataset of 12 angiosperm families are shown below.
+      Work is ongoing. Preliminary qualitative results from early reconstruction experiments are shown below.
     </p>
 
     <!-- Qualitative -->
