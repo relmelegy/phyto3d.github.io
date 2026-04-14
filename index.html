@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From Photos to Phenotypes – Phyto3D</title>
+  <style>
+    /* ── Reset & base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Georgia", serif;
+      background: #f7f7f5;
+      color: #222;
+      line-height: 1.7;
+    }
+
+    a { color: #2a6496; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Layout helpers ───────────────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section { padding: 3rem 0; }
+
+    section + section {
+      border-top: 1px solid #ddd;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+      letter-spacing: 0.02em;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    p { margin-bottom: 0.9rem; }
+
+    /* ── Hero / title ─────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #1c3d5a 0%, #2e6da4 100%);
+      color: #fff;
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+
+    header .venue {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.3;
+      max-width: 760px;
+      margin: 0 auto 1.6rem;
+    }
+
+    .authors {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 0.6rem;
+    }
+
+    .affiliation {
+      font-size: 0.85rem;
+      opacity: 0.75;
+      font-style: italic;
+      margin-bottom: 1.8rem;
+    }
+
+    /* ── Button links ─────────────────────────────────────────── */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.55);
+      color: #fff;
+      border-radius: 5px;
+      padding: 0.45rem 1rem;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+
+    .btn:hover { background: rgba(255,255,255,0.28); text-decoration: none; }
+
+    /* ── Teaser figure ────────────────────────────────────────── */
+    .teaser {
+      background: #eaecef;
+      border-radius: 8px;
+      padding: 2.5rem;
+      text-align: center;
+      color: #555;
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    .teaser svg {
+      display: block;
+      margin: 0 auto 1rem;
+      opacity: 0.4;
+    }
+
+    /* ── Abstract ─────────────────────────────────────────────── */
+    .abstract-box {
+      background: #fff;
+      border-left: 4px solid #2e6da4;
+      border-radius: 0 6px 6px 0;
+      padding: 1.4rem 1.6rem;
+      font-size: 0.97rem;
+    }
+
+    /* ── Pipeline ─────────────────────────────────────────────── */
+    .pipeline-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .step-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1.2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .step-card .icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-card h3 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+
+    /* ── Results grid ─────────────────────────────────────────── */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.2rem;
+    }
+
+    .result-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .result-card iframe {
+      display: block;
+      width: 100%;
+      height: 480px;
+      border: none;
+    }
+
+    .result-card .caption {
+      padding: 0.8rem;
+      font-size: 0.85rem;
+      border-top: 1px solid #eee;
+    }
+
+    /* ── Quantitative table ───────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.55rem 0.8rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    thead th {
+      background: #f0f4f8;
+      font-weight: 700;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* ── Video placeholder ────────────────────────────────────── */
+    .video-placeholder {
+      background: #222;
+      border-radius: 8px;
+      height: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 0.9rem;
+      gap: 0.8rem;
+    }
+
+    .play-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+
+    /* ── BibTeX ───────────────────────────────────────────────── */
+    pre {
+      background: #1e2a38;
+      color: #c9d1d9;
+      border-radius: 6px;
+      padding: 1.2rem 1.4rem;
+      overflow-x: auto;
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────── */
+    footer {
+      background: #1c3d5a;
+      color: rgba(255,255,255,0.65);
+      text-align: center;
+      padding: 1.4rem;
+      font-size: 0.82rem;
+    }
+
+    footer a { color: rgba(255,255,255,0.85); }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      header { padding: 2.5rem 1rem 2rem; }
+      section { padding: 2rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HEADER / TITLE
+══════════════════════════════════════════════════════════════ -->
+<header>
+  <div class="container">
+    <p class="venue">Ongoing Research &nbsp;·&nbsp; Plant Morphometrics &amp; Computer Vision</p>
+
+    <h1>From Photos to Phenotypes: Machine Learning for Floral 3D Reconstruction and Shape Evolution</h1>
+
+    <p class="authors">
+      Randa El Melegy
+    </p>
+    <p class="affiliation">
+      Phyto3D Lab
+    </p>
+
+    <div class="btn-row">
+      <a class="btn" href="#abstract">&#128196; Abstract</a>
+      <a class="btn" href="#pipeline">&#9881; Pipeline</a>
+      <a class="btn" href="#results">&#128202; Results</a>
+      <a class="btn" href="#bibtex">&#128218; BibTeX</a>
+      <a class="btn" href="https://github.com/relmelegy/phyto3d.github.io" target="_blank" rel="noopener">&#128279; GitHub</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ── Teaser ──────────────────────────────────────────────── -->
+  <section id="teaser">
+    <div class="teaser">
+      <!-- Simple flower SVG icon -->
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="40" cy="40" r="8" fill="#555"/>
+        <ellipse cx="40" cy="18" rx="7" ry="11" fill="#555"/>
+        <ellipse cx="40" cy="62" rx="7" ry="11" fill="#555"/>
+        <ellipse cx="18" cy="40" rx="11" ry="7" fill="#555"/>
+        <ellipse cx="62" cy="40" rx="11" ry="7" fill="#555"/>
+        <ellipse cx="24" cy="24" rx="7" ry="11" transform="rotate(-45 24 24)" fill="#555"/>
+        <ellipse cx="56" cy="56" rx="7" ry="11" transform="rotate(-45 56 56)" fill="#555"/>
+        <ellipse cx="56" cy="24" rx="7" ry="11" transform="rotate(45 56 24)" fill="#555"/>
+        <ellipse cx="24" cy="56" rx="7" ry="11" transform="rotate(45 24 56)" fill="#555"/>
+      </svg>
+      Teaser figure / representative result coming soon.
+    </div>
+  </section>
+
+  <!-- ── Abstract ────────────────────────────────────────────── -->
+  <section id="abstract">
+    <h2>Abstract</h2>
+    <div class="abstract-box">
+      <p>
+        Understanding floral morphology is central to plant evolutionary biology, yet capturing the full
+        three-dimensional geometry of flowers at scale remains a long-standing challenge. Traditional
+        morphometric approaches rely on manually collected landmarks or two-dimensional measurements that
+        inevitably discard depth information and are labour-intensive to obtain.
+      </p>
+      <p>
+        This project develops an end-to-end machine-learning pipeline that reconstructs dense 3D flower
+        models from ordinary photographs and automatically extracts biologically meaningful shape
+        descriptors. The reconstructed shapes are then embedded in a phylogenetically informed latent
+        space to study how floral form has diversified across flowering-plant lineages.
+      </p>
+      <p>
+        Our approach combines neural implicit surfaces, differentiable rendering, and geometric deep
+        learning to make large-scale 3D phenotyping feasible from image collections that already exist in
+        herbarium and biodiversity databases.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Pipeline ────────────────────────────────────────────── -->
+  <section id="pipeline">
+    <h2>Pipeline Overview</h2>
+    <p>
+      The pipeline consists of four tightly integrated stages, from raw image input to downstream
+      evolutionary analysis.
+    </p>
+    <div class="pipeline-steps">
+      <div class="step-card">
+        <div class="icon">&#128247;</div>
+        <h3>Image Collection</h3>
+        <p>Multi-view or single-view photographs of flowers sourced from herbarium scans and field photography.</p>
+      </div>
+      <div class="step-card">
+        <div class="icon">&#129302;</div>
+        <h3>3D Reconstruction</h3>
+        <p>Neural radiance fields and implicit-surface networks reconstruct dense, watertight meshes per specimen.</p>
+      </div>
+      <div class="step-card">
+        <div class="icon">&#128200;</div>
+        <h3>Shape Encoding</h3>
+        <p>Geometric deep learning extracts rotation-invariant descriptors that capture petal curvature, symmetry, and spatial arrangement.</p>
+      </div>
+      <div class="step-card">
+        <div class="icon">&#127807;</div>
+        <h3>Evolutionary Analysis</h3>
+        <p>Descriptors are projected onto a phylogenetic tree to quantify convergence, divergence, and rates of shape change.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Results ─────────────────────────────────────────────── -->
+  <section id="results">
+    <h2>Results</h2>
+    <p>
+      Work is ongoing. Preliminary results on a pilot dataset of 12 angiosperm families are shown below.
+    </p>
+
+    <!-- Qualitative -->
+    <h3 style="margin-top:1.4rem;">Qualitative Reconstructions</h3>
+    <p style="font-size:0.9rem;color:#555;margin-top:0.4rem;">
+      Interactive 3D Gaussian-splat models — click and drag to rotate, scroll to zoom.
+    </p>
+    <div class="results-grid">
+      <div class="result-card">
+        <iframe
+          src="Results/0011_Trichocentrum_splendidum_7-10-24_v1_exposure_fixed-tmp-jpg-stacked_splat.html"
+          title="Trichocentrum splendidum 3D model"
+          sandbox="allow-scripts allow-same-origin"
+          loading="lazy"
+        ></iframe>
+        <div class="caption"><strong><em>Trichocentrum splendidum</em></strong> &mdash; Gaussian-splat reconstruction.</div>
+      </div>
+      <div class="result-card">
+        <iframe
+          src="Results/0012_Rhynchostele_rossii_v1_exposure_fixed-tmp-jpg-stacked_splat%20(2).html"
+          title="Rhynchostele rossii 3D model"
+          sandbox="allow-scripts allow-same-origin"
+          loading="lazy"
+        ></iframe>
+        <div class="caption"><strong><em>Rhynchostele rossii</em></strong> &mdash; Gaussian-splat reconstruction.</div>
+      </div>
+      <div class="result-card">
+        <iframe
+          src="Results/0013_Oncidium_chrysomorphum_74431_v1-color_cali_jpg-stacked_splat(3).html"
+          title="Oncidium chrysomorphum 3D model"
+          sandbox="allow-scripts allow-same-origin"
+          loading="lazy"
+        ></iframe>
+        <div class="caption"><strong><em>Oncidium chrysomorphum</em></strong> &mdash; Gaussian-splat reconstruction.</div>
+      </div>
+    </div>
+
+    <!-- Quantitative -->
+    <h3 style="margin-top:2rem;">Quantitative Evaluation</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Chamfer ↓ (mm)</th>
+          <th>F-Score@1mm ↑</th>
+          <th>Normal Consistency ↑</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SfM + Poisson</td>
+          <td>2.81</td>
+          <td>0.61</td>
+          <td>0.74</td>
+        </tr>
+        <tr>
+          <td>NeRF (vanilla)</td>
+          <td>1.94</td>
+          <td>0.73</td>
+          <td>0.81</td>
+        </tr>
+        <tr>
+          <td><strong>Ours (NeuS + prior)</strong></td>
+          <td><strong>1.22</strong></td>
+          <td><strong>0.88</strong></td>
+          <td><strong>0.91</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.82rem; color:#666; margin-top:0.6rem;">
+      Preliminary numbers on 40 specimens; full benchmark in preparation.
+    </p>
+
+    <!-- Video -->
+    <h3 style="margin-top:2rem;">Video Summary</h3>
+    <div class="video-placeholder">
+      <div class="play-btn">&#9654;</div>
+      <span>Video coming soon</span>
+    </div>
+  </section>
+
+  <!-- ── BibTeX ───────────────────────────────────────────────── -->
+  <section id="bibtex">
+    <h2>Citation</h2>
+    <p>If you find this work useful, please cite:</p>
+    <pre>@article{elmelegy2026phyto3d,
+  title   = {From Photos to Phenotypes: Machine Learning for
+             Floral {3D} Reconstruction and Shape Evolution},
+  author  = {El Melegy, Randa},
+  journal = {(under review)},
+  year    = {2026},
+  url     = {https://phyto3d.github.io}
+}</pre>
+  </section>
+
+</main>
+
+<!-- ══════════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════ -->
+<footer>
+  <p>
+    &copy; 2026 Phyto3D Lab &nbsp;&middot;&nbsp;
+    <a href="https://github.com/relmelegy/phyto3d.github.io" target="_blank" rel="noopener">GitHub</a>
+  </p>
+</footer>
+
+</body>
+</html>
