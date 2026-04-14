@@ -159,8 +159,8 @@
     /* ── Results grid ─────────────────────────────────────────── */
     .results-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
       margin-top: 1.2rem;
     }
 
@@ -171,20 +171,17 @@
       overflow: hidden;
     }
 
-    .result-card .thumb {
-      background: #dbe7f3;
-      height: 130px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #7a9cbf;
-      font-size: 0.8rem;
-      font-style: italic;
+    .result-card iframe {
+      display: block;
+      width: 100%;
+      height: 480px;
+      border: none;
     }
 
     .result-card .caption {
       padding: 0.8rem;
       font-size: 0.85rem;
+      border-top: 1px solid #eee;
     }
 
     /* ── Quantitative table ───────────────────────────────────── */
@@ -375,18 +372,36 @@
 
     <!-- Qualitative -->
     <h3 style="margin-top:1.4rem;">Qualitative Reconstructions</h3>
+    <p style="font-size:0.9rem;color:#555;margin-top:0.4rem;">
+      Interactive 3D Gaussian-splat models — click and drag to rotate, scroll to zoom.
+    </p>
     <div class="results-grid">
       <div class="result-card">
-        <div class="thumb">3D render — coming soon</div>
-        <div class="caption"><strong>Species A</strong> &mdash; anterior view of reconstructed mesh.</div>
+        <iframe
+          src="Results/0011_Trichocentrum_splendidum_7-10-24_v1_exposure_fixed-tmp-jpg-stacked_splat.html"
+          title="Trichocentrum splendidum 3D model"
+          sandbox="allow-scripts allow-same-origin"
+          loading="lazy"
+        ></iframe>
+        <div class="caption"><strong><em>Trichocentrum splendidum</em></strong> &mdash; Gaussian-splat reconstruction.</div>
       </div>
       <div class="result-card">
-        <div class="thumb">3D render — coming soon</div>
-        <div class="caption"><strong>Species B</strong> &mdash; reconstructed corolla with pseudocolour curvature.</div>
+        <iframe
+          src="Results/0012_Rhynchostele_rossii_v1_exposure_fixed-tmp-jpg-stacked_splat%20(2).html"
+          title="Rhynchostele rossii 3D model"
+          sandbox="allow-scripts allow-same-origin"
+          loading="lazy"
+        ></iframe>
+        <div class="caption"><strong><em>Rhynchostele rossii</em></strong> &mdash; Gaussian-splat reconstruction.</div>
       </div>
       <div class="result-card">
-        <div class="thumb">3D render — coming soon</div>
-        <div class="caption"><strong>Species C</strong> &mdash; cross-section of the reconstructed receptacle.</div>
+        <iframe
+          src="Results/0013_Oncidium_chrysomorphum_74431_v1-color_cali_jpg-stacked_splat(3).html"
+          title="Oncidium chrysomorphum 3D model"
+          sandbox="allow-scripts allow-same-origin"
+          loading="lazy"
+        ></iframe>
+        <div class="caption"><strong><em>Oncidium chrysomorphum</em></strong> &mdash; Gaussian-splat reconstruction.</div>
       </div>
     </div>
 
